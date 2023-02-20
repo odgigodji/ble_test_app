@@ -65,15 +65,16 @@ class BTPeriferalTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: BTTableViewCell.reuseID)  as? BTTableViewCell else {
             return BTTableViewCell()
         }
-//        cell.textLabel?.numberOfLines = 2
+        cell.textLabel?.numberOfLines = 2
         
         let peripheralsArray = Array(discoveredPeripherals)
 //        if peripheralsArray.count > indexPath.row {
 //            cell.populate(displayPeripheral: peripheralsArray[indexPath.row])
 //        }
         
+        
 //        cell.nameLabel.text = "her"
-        cell.nameLabel.text = "\(peripheralsArray[indexPath.row].peripheral.name)\n" + "\(peripheralsArray[indexPath.row].peripheral.identifier)"
+        cell.nameLabel.text = "\(peripheralsArray[indexPath.row].peripheral.name) " +   " \(peripheralsArray[indexPath.row].isConnectable)"
         return cell
     }
 }
@@ -106,6 +107,7 @@ extension BTPeriferalTableViewController: CBCentralManagerDelegate {
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         //        self.peripheral.insert(peripheral)
+        let isConnectable = advertisementData["kCBAdvDataIsConnectable"] as! Bool
         
         let displayPeripheral = DisplayPeripheral(peripheral: peripheral, lastRSSI: RSSI, isConnectable: true)
         
