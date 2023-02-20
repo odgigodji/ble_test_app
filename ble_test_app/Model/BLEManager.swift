@@ -10,14 +10,20 @@ import CoreBluetooth
 
 protocol BLEManager: AnyObject {
     var centralManager: CBCentralManager! { get set }
+    var discoveredPeripherals : Set<DisplayPeripheral> { get set }
+    var delegate : CBCentralManagerDelegate! { get set }
     
     func startScan()
 }
 
 final class BLEManagerImpl: BLEManager {
+    var delegate: CBCentralManagerDelegate!
+    
     var centralManager: CBCentralManager!
+    var discoveredPeripherals = Set<DisplayPeripheral>()
     
     init(on viewController: CBCentralManagerDelegate) {
+        delegate = viewController
         centralManager = CBCentralManager(delegate: viewController, queue: nil)
     }
     
@@ -25,7 +31,14 @@ final class BLEManagerImpl: BLEManager {
         centralManager.scanForPeripherals(withServices: nil, options: nil)
     }
     
-    func centralManagerDidUpdateState() {
+    func getDiscoveredPeripherals(advertisementData: [String : Any], rssi RSSI: NSNumber, peripheral: CBPeripheral){
+//        let isConnectable = advertisementData["kCBAdvDataIsConnectable"] as! Bool
+//
+//        let displayPeripheral = DisplayPeripheral(peripheral: peripheral, lastRSSI: RSSI, isConnectable: isConnectable)
+//
+//        if discoveredPeripherals.contains(displayPeripheral) == false {
+//            discoveredPeripherals.insert(displayPeripheral)
+//        }
         
     }
  

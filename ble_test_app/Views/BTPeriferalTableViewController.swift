@@ -22,7 +22,7 @@ struct DisplayPeripheral: Hashable {
 
 class BTPeriferalTableViewController: UITableViewController {
 //    private var centralManager: CBCentralManager!
-    private var deviceManager : BLEManager!
+//    private var deviceManager : BLEManager!
     var services = [CBUUID]()
     
     var output: BTPresenterOutput!
@@ -40,7 +40,7 @@ class BTPeriferalTableViewController: UITableViewController {
         view.backgroundColor = .brown
 
 //        deviceManager = BLEManagerImpl(on: self)
-        deviceManager = BLEManagerImpl(on: self)
+//        deviceManager = BLEManagerImpl(on: self)
         
 //        navigationController?.title = "Device Manager"
 //        navigationController?.navigationBar.prefersLargeTitles = true
@@ -54,10 +54,10 @@ class BTPeriferalTableViewController: UITableViewController {
         tableView.register(BTTableViewCell.self, forCellReuseIdentifier: BTTableViewCell.reuseID)
     }
     
-    func startScan() {
+//    func startScan() {
 //        centralManager.scanForPeripherals(withServices: .none, options: [CBCentralManagerScanOptionAllowDuplicatesKey: false])
-        deviceManager.startScan()
-    }
+//        deviceManager.startScan()
+//    }
     
 
 //MARK: - UITableViewDelegate, UITableViewDataSource {
@@ -88,36 +88,25 @@ extension BTPeriferalTableViewController: CBCentralManagerDelegate {
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         switch central.state {
         case .poweredOn:
-            print("power on")
-            startScan()
-        case .poweredOff:
-            print("alert user to turn on bluetooth")
-            // Alert user to turn on Bluetooth
-        case .resetting:
-            print("ressetting")
-            // Wait for next state update and consider logging interruption of Bluetooth service
-        case .unauthorized:
-            print("unauthorized")
-            // Alert user to enable Bluetooth permission in app Settings
-        case .unsupported:
-            print("unsupported")
-            // Alert user their device does not support Bluetooth and app will not work as expected
-        case .unknown:
-            print("unknown")
-        @unknown default:
-            print("default")
+            output.startScan()
+        default:
+            print("bluetooth off or problems with it")
         }
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        //        self.peripheral.insert(peripheral)
+//                self.peripheral.insert(peripheral)
+        
+//        DispatchQueue.global().async {[weak self] in
+        //            guard let self = self else { return }
         let isConnectable = advertisementData["kCBAdvDataIsConnectable"] as! Bool
         
         let displayPeripheral = DisplayPeripheral(peripheral: peripheral, lastRSSI: RSSI, isConnectable: isConnectable)
         
-        if discoveredPeripherals.contains(displayPeripheral) == false {
-            discoveredPeripherals.insert(displayPeripheral)
+        if self.discoveredPeripherals.contains(displayPeripheral) == false {
+            self.discoveredPeripherals.insert(displayPeripheral)
         }
+        //        }
         tableView.reloadData()
 //        print(RSSI.int16Value)
     }
@@ -126,7 +115,7 @@ extension BTPeriferalTableViewController: CBCentralManagerDelegate {
 
 extension BTPeriferalTableViewController: BTPresenterInput {
     func showDevices(_ discoveredPeripherals: Set<DisplayPeripheral>) {
-        print("her")
+//        self.discoveredPeripherals = discoveredPeripherals
+//        tableView.reloadData()
     }
-    
 }

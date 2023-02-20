@@ -7,15 +7,18 @@
 
 import Foundation
 
-
 class BTPresenter: BTPresenterOutput {
     
     weak var view: BTPresenterInput!
     var deviceManager : BLEManager!
     
-    func didPressedAction() {
+    func startScan() {
+        deviceManager.startScan()
         
+//        let devices = deviceManager.discoveredPeripherals
+//        view.showDevices(devices)
 //        let numbers = dataManager.obtainNumbers()
+//        deviceManager.getDicove
 //        view.showNumbers(numbers)
     }
     

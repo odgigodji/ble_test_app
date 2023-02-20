@@ -9,6 +9,6 @@ import Foundation
 
 
 protocol BTPresenterOutput: AnyObject {
-    func didPressedAction()
+    func startScan()
 //    func updateDataManger()
 }
