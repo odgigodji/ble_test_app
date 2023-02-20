@@ -21,7 +21,8 @@ struct DisplayPeripheral: Hashable {
 }
 
 class BTPeriferalTableViewController: UITableViewController {
-    private var centralManager: CBCentralManager!
+//    private var centralManager: CBCentralManager!
+    private var deviceManager : BLEManager!
     var services = [CBUUID]()
     
     var output: BTPresenterOutput!
@@ -38,10 +39,13 @@ class BTPeriferalTableViewController: UITableViewController {
 //        view.backgroundColor = .systemBackground
         view.backgroundColor = .brown
 
+//        deviceManager = BLEManagerImpl(on: self)
+        deviceManager = BLEManagerImpl(on: self)
+        
 //        navigationController?.title = "Device Manager"
 //        navigationController?.navigationBar.prefersLargeTitles = true
         
-        centralManager = CBCentralManager(delegate: self, queue: nil)
+//        deviceManager.centralManager = CBCentralManager(delegate: self, queue: nil)
     }
     
     func setTableView() {
@@ -52,7 +56,7 @@ class BTPeriferalTableViewController: UITableViewController {
     
     func startScan() {
 //        centralManager.scanForPeripherals(withServices: .none, options: [CBCentralManagerScanOptionAllowDuplicatesKey: false])
-        centralManager.scanForPeripherals(withServices: nil, options: nil)
+        deviceManager.startScan()
     }
     
 
@@ -121,7 +125,7 @@ extension BTPeriferalTableViewController: CBCentralManagerDelegate {
 
 
 extension BTPeriferalTableViewController: BTPresenterInput {
-    func showNumbers(_ numbers: [Int]) {
+    func showDevices(_ discoveredPeripherals: Set<DisplayPeripheral>) {
         print("her")
     }
     

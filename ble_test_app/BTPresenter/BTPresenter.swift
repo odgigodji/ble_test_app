@@ -11,7 +11,7 @@ import Foundation
 class BTPresenter: BTPresenterOutput {
     
     weak var view: BTPresenterInput!
-//    var dataManager: DataManager!
+    var deviceManager : BLEManager!
     
     func didPressedAction() {
         
