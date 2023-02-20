@@ -47,7 +47,7 @@ class BTPeriferalTableViewController: UITableViewController {
     func setTableView() {
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(BTTableViewCell.self, forCellReuseIdentifier: BTTableViewCell.reuseID)
     }
     
     func startScan() {
@@ -62,17 +62,18 @@ class BTPeriferalTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") else {
-            return UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: BTTableViewCell.reuseID)  as? BTTableViewCell else {
+            return BTTableViewCell()
         }
-        cell.textLabel?.numberOfLines = 2
+//        cell.textLabel?.numberOfLines = 2
         
         let peripheralsArray = Array(discoveredPeripherals)
 //        if peripheralsArray.count > indexPath.row {
 //            cell.populate(displayPeripheral: peripheralsArray[indexPath.row])
 //        }
         
-        cell.textLabel?.text = "\(peripheralsArray[indexPath.row].peripheral.name)\n" + "\(peripheralsArray[indexPath.row].peripheral.identifier)"
+//        cell.nameLabel.text = "her"
+        cell.nameLabel.text = "\(peripheralsArray[indexPath.row].peripheral.name)\n" + "\(peripheralsArray[indexPath.row].peripheral.identifier)"
         return cell
     }
 }
@@ -112,7 +113,7 @@ extension BTPeriferalTableViewController: CBCentralManagerDelegate {
             discoveredPeripherals.insert(displayPeripheral)
         }
         tableView.reloadData()
-        print(RSSI.int16Value)
+//        print(RSSI.int16Value)
     }
 }
 
