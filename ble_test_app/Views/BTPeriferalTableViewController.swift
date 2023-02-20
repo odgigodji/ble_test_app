@@ -109,7 +109,7 @@ extension BTPeriferalTableViewController: CBCentralManagerDelegate {
         //        self.peripheral.insert(peripheral)
         let isConnectable = advertisementData["kCBAdvDataIsConnectable"] as! Bool
         
-        let displayPeripheral = DisplayPeripheral(peripheral: peripheral, lastRSSI: RSSI, isConnectable: true)
+        let displayPeripheral = DisplayPeripheral(peripheral: peripheral, lastRSSI: RSSI, isConnectable: isConnectable)
         
         if discoveredPeripherals.contains(displayPeripheral) == false {
             discoveredPeripherals.insert(displayPeripheral)

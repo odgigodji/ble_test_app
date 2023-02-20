@@ -12,6 +12,7 @@
 		FA03DB8729A3E7B3007DEBDF /* BTPresenterOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03DB8629A3E7B3007DEBDF /* BTPresenterOutput.swift */; };
 		FA03DB8929A3E7C7007DEBDF /* BTPresenterInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03DB8829A3E7C7007DEBDF /* BTPresenterInput.swift */; };
 		FA03DB8C29A3EA05007DEBDF /* Assembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03DB8B29A3EA05007DEBDF /* Assembly.swift */; };
+		FA03DB8F29A40463007DEBDF /* BLEManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03DB8E29A40463007DEBDF /* BLEManager.swift */; };
 		FA6386E8299F9EE200A0A06F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6386E7299F9EE200A0A06F /* AppDelegate.swift */; };
 		FA6386EA299F9EE200A0A06F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6386E9299F9EE200A0A06F /* SceneDelegate.swift */; };
 		FA6386EC299F9EE200A0A06F /* BTPeriferalTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6386EB299F9EE200A0A06F /* BTPeriferalTableViewController.swift */; };
@@ -25,6 +26,7 @@
 		FA03DB8629A3E7B3007DEBDF /* BTPresenterOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTPresenterOutput.swift; sourceTree = "<group>"; };
 		FA03DB8829A3E7C7007DEBDF /* BTPresenterInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTPresenterInput.swift; sourceTree = "<group>"; };
 		FA03DB8B29A3EA05007DEBDF /* Assembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assembly.swift; sourceTree = "<group>"; };
+		FA03DB8E29A40463007DEBDF /* BLEManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEManager.swift; sourceTree = "<group>"; };
 		FA6386E4299F9EE200A0A06F /* ble_test_app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ble_test_app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA6386E7299F9EE200A0A06F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA6386E9299F9EE200A0A06F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -72,6 +74,14 @@
 			path = BTPresenter;
 			sourceTree = "<group>";
 		};
+		FA03DB8D29A40453007DEBDF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FA03DB8E29A40463007DEBDF /* BLEManager.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		FA6386DB299F9EE200A0A06F = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +101,7 @@
 		FA6386E6299F9EE200A0A06F /* ble_test_app */ = {
 			isa = PBXGroup;
 			children = (
+				FA03DB8D29A40453007DEBDF /* Model */,
 				FA03DB8A29A3E7CC007DEBDF /* BTPresenter */,
 				FA6386FB299F9EF200A0A06F /* Support */,
 				FA03DB8029A3E3BD007DEBDF /* Views */,
@@ -188,6 +199,7 @@
 				FA6386E8299F9EE200A0A06F /* AppDelegate.swift in Sources */,
 				FA03DB8729A3E7B3007DEBDF /* BTPresenterOutput.swift in Sources */,
 				FA6386EA299F9EE200A0A06F /* SceneDelegate.swift in Sources */,
+				FA03DB8F29A40463007DEBDF /* BLEManager.swift in Sources */,
 				FA03DB8529A3E79A007DEBDF /* BTPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
