@@ -9,6 +9,6 @@ import Foundation
 
 
 protocol BTPresenterOutput: AnyObject {
-    func startScan()
-//    func updateDataManger()
+    func startScan(completed: @escaping (Set<BTDisplayPeripheral>) -> ())
+    func updatePeripherals()
 }

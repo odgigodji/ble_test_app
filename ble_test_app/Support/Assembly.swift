@@ -18,8 +18,10 @@ class MainAssembly {
         view.output             = presenter
         
         presenter.view          = view
-        dataManager = BLEManagerImpl(on: presenter.view as! CBCentralManagerDelegate)
+        dataManager             = BLEManagerImpl()
+        
         presenter.deviceManager = dataManager
+        presenter.deviceManager.configureManager()
     }
     
 }

@@ -8,5 +8,5 @@
 import Foundation
 
 protocol BTPresenterInput: AnyObject {
-    func showDevices(_ discoveredPeripherals: Set<DisplayPeripheral>)
+    func showDevices()
 }

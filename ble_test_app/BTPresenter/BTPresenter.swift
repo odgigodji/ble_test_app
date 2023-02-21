@@ -12,18 +12,32 @@ class BTPresenter: BTPresenterOutput {
     weak var view: BTPresenterInput!
     var deviceManager : BLEManager!
     
-    func startScan() {
+    func startScan(completed: @escaping (Set<BTDisplayPeripheral>) -> ()) {
         deviceManager.startScan()
+       
+        let discoveredPeripherals = self.deviceManager.discoveredPeripherals
+//        completed(discoveredPeripherals)
+        print(discoveredPeripherals)
         
-//        let devices = deviceManager.discoveredPeripherals
-//        view.showDevices(devices)
+//        view.showDevices()
+//            if devices.isEmpty {
+//                print("EMPTTY")
+//            } else {
+//                print("FULL")
+//            }
+//        }
 //        let numbers = dataManager.obtainNumbers()
 //        deviceManager.getDicove
 //        view.showNumbers(numbers)
     }
     
-//    func updateDataManger() {
-//        dataManager.numbers = [6, 7, 8, 9, 10]
-//    }
+    //when discoveredPeripherals - update ui
+    func updatePeripherals() {
+//        var devices = Set<BTDisplayPeripheral>()
+//        devices = self.deviceManager.discoveredPeripherals
+//        DispatchQueue.global().asyncAfter(deadline: .now() + 3, execute: {
+//            self.view.showDevices(devices)
+//        })
+    }
     
 }
