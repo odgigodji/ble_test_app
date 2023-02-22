@@ -8,16 +8,11 @@
 import UIKit
 import CoreBluetooth
 
-protocol BLEManager: AnyObject {
-//    var centralManager: CBCentralManager! { get set }
+
+protocol BLEManager: AnyObject, BLManagerSubject {
     var discoveredPeripherals : Set<BTDisplayPeripheral> { get set }
-//    var delegate : CBCentralManagerDelegate! { get set }
     func configureManager()
     func startScan()
-    
-    func attach(_ observer: BLEManagerObserver)
-    func detach(_ observer: BLEManagerObserver)
-    func notify()
 }
 
 final class BLEManagerImpl: CBCentralManager, CBCentralManagerDelegate, BLEManager {
@@ -29,40 +24,23 @@ final class BLEManagerImpl: CBCentralManager, CBCentralManagerDelegate, BLEManag
 
     /// The subscription management methods.
     func attach(_ observer: BLEManagerObserver) {
-        print("Subject: Attached an observer.\n")
         observers.append(observer)
     }
 
     func detach(_ observer: BLEManagerObserver) {
         if let idx = observers.firstIndex(where: { $0 === observer }) {
             observers.remove(at: idx)
-            print("Subject: Detached an observer.\n")
         }
     }
 
     /// Trigger an update in each subscriber.
     func notify() {
-        print("Subject: Notifying observers...\n")
         observers.forEach({ $0.update(subject: self)})
     }
-
-    /// Usually, the subscription logic is only a fraction of what a Subject can
-    /// really do. Subjects commonly hold some important business logic, that
-    /// triggers a notification method whenever something important is about to
-    /// happen (or after it).
-//    func someBusinessLogic() {
-//        print("\nSubject: I'm doing something important.\n")
-//        state = Int(arc4random_uniform(10))
-//        print("Subject: My state has just changed to: \(state)\n")
-//        notify()
-//    }
-    
-    
     
     
     func configureManager() {
         delegate = self
-//        startScan()
     }
     
     func startScan() {

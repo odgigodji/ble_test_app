@@ -7,6 +7,12 @@
 
 import Foundation
 
+protocol BLManagerSubject: AnyObject {
+    func attach(_ observer: BLEManagerObserver)
+    func detach(_ observer: BLEManagerObserver)
+    func notify()
+}
+
 protocol BLEManagerObserver: AnyObject {
     func update(subject: BLEManager)
 }
