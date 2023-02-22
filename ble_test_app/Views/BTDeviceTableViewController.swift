@@ -9,31 +9,23 @@ import UIKit
 
 class BTDeviceTableViewController: UITableViewController {
 
+    var output: BTPresenterOutput!
     var peripheral: BTDisplayPeripheral!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .lightGray
-        
-//        navigationItem.title = "N/A"
-//        navigationController?.navigationBar.prefersLargeTitles = true
-//        navigationController?.navigationBar.topItem?.title = "her"
-    }
-    
-    func setVC(with peripheral: BTDisplayPeripheral) {
-        self.peripheral = peripheral
-//        navigationItem.title = peripheral.peripheral.name
-        navigationItem.title = peripheral.peripheral.name ?? "N/A"
-        
         configureTableView()
-//        navigationController?.navigationBar.topItem?.title = "her"
     }
     
+
     func configureTableView() {
         tableView.rowHeight = 80
         tableView.sectionHeaderHeight = 50
     }
     
+    
+    //MARK: - Delegate, DataSource
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
@@ -61,6 +53,27 @@ class BTDeviceTableViewController: UITableViewController {
         default:
             return "n/a"
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            output.updateDetail()
+        default:
+            return
+        }
+    }
+    
+}
+
+extension BTDeviceTableViewController: BTPresenterDetailInput {
+    func setVC(with peripheral: BTDisplayPeripheral) {
+        self.peripheral = peripheral
+        navigationItem.title = peripheral.peripheral.name ?? "N/A"
+    }
+    
+    func updateVC() {
+        print("LALAL")
     }
     
 }

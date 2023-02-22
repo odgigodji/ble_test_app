@@ -57,15 +57,15 @@ class BTPeriferalTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        print(discoveredPeripherals[indexPath.row])
-        let vc = BTDeviceTableViewController()
-        vc.setVC(with: discoveredPeripherals[indexPath.row])
         
+        output.detailView.setVC(with: discoveredPeripherals[indexPath.row])
+        let vc = output.detailView as! UIViewController
         navigationController?.pushViewController(vc, animated: true)
     }
 }
 
 
-extension BTPeriferalTableViewController: BTPresenterInput {
+extension BTPeriferalTableViewController: BTPresenterMainInput {
     
     func updatePeripheralsOnTableView(peripherals: [BTDisplayPeripheral]) {
         discoveredPeripherals = peripherals

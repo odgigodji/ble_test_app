@@ -7,7 +7,12 @@
 
 import Foundation
 
-protocol BTPresenterInput: AnyObject {
-    var discoveredPeripherals : [BTDisplayPeripheral] { get set }
+protocol BTPresenterMainInput: AnyObject {
+//    var discoveredPeripherals : [BTDisplayPeripheral] { get set }
     func updatePeripheralsOnTableView(peripherals: [BTDisplayPeripheral])
+}
+
+protocol BTPresenterDetailInput: AnyObject {
+    func setVC(with peripheral: BTDisplayPeripheral)
+    func updateVC()
 }

@@ -15,29 +15,12 @@ protocol BLEManager: AnyObject, BLManagerSubject {
     func startScan()
 }
 
+
 final class BLEManagerImpl: CBCentralManager, CBCentralManagerDelegate, BLEManager {
 
     var discoveredPeripherals = Set<BTDisplayPeripheral>()
     
-    //MARK: - observers stuff
     private lazy var observers = [BLEManagerObserver]()
-
-    /// The subscription management methods.
-    func attach(_ observer: BLEManagerObserver) {
-        observers.append(observer)
-    }
-
-    func detach(_ observer: BLEManagerObserver) {
-        if let idx = observers.firstIndex(where: { $0 === observer }) {
-            observers.remove(at: idx)
-        }
-    }
-
-    /// Trigger an update in each subscriber.
-    func notify() {
-        observers.forEach({ $0.update(subject: self)})
-    }
-    
     
     func configureManager() {
         delegate = self
@@ -62,14 +45,7 @@ final class BLEManagerImpl: CBCentralManager, CBCentralManagerDelegate, BLEManag
             self.discoveredPeripherals.insert(displayPeripheral)
 //            print(displayPeripheral)
         }
-        
         notify()
-        //        }
-        
-//        tableView.reloadData()
-        
-//        print(RSSI.int16Value)
-//        print(discoveredPeripherals)
     }
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
@@ -81,6 +57,24 @@ final class BLEManagerImpl: CBCentralManager, CBCentralManagerDelegate, BLEManag
         default:
             print("bluetooth off or problems with it")
         }
+    }
+    
+    
+    //MARK: - Observer / Subject
+    /// The subscription management methods.
+    func attach(_ observer: BLEManagerObserver) {
+        observers.append(observer)
+    }
+
+    func detach(_ observer: BLEManagerObserver) {
+        if let idx = observers.firstIndex(where: { $0 === observer }) {
+            observers.remove(at: idx)
+        }
+    }
+
+    /// Trigger an update in each subscriber.
+    func notify() {
+        observers.forEach({ $0.update(subject: self)})
     }
     
 }

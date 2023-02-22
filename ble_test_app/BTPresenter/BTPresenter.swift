@@ -5,11 +5,12 @@
 //  Created by Nikita Evdokimov on 20.02.23.
 //
 
-import Foundation
+import UIKit
 
 class BTPresenter: BTPresenterOutput, BLEManagerObserver {
     
-    weak var view: BTPresenterInput!
+    weak var view: BTPresenterMainInput!
+    weak var detailView: BTPresenterDetailInput!
     var deviceManager : BLEManager!
     
     func startScan() {
@@ -26,4 +27,12 @@ class BTPresenter: BTPresenterOutput, BLEManagerObserver {
         view.updatePeripheralsOnTableView(peripherals: peripherals)
     }
     
+    func updateDetail() {
+        detailView.updateVC()
+    }
+    
+//    func createDetailView(with peripheral: BTDisplayPeripheral) -> UIViewController {
+//        detailView.setVC(with: peripheral)
+//        return (detailView as? UIViewController)!
+//    }
 }

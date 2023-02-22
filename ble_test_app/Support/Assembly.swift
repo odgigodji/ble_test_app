@@ -11,13 +11,17 @@ import CoreBluetooth
 class MainAssembly {
     
     var view                = BTPeriferalTableViewController()
+    var detailView          = BTDeviceTableViewController()
     let presenter           = BTPresenter()
     var dataManager         : BLEManager! = nil
     
     func createMainPresenter() {
         view.output             = presenter
+        detailView.output       = presenter
         
         presenter.view          = view
+        presenter.detailView    = detailView
+        
         dataManager             = BLEManagerImpl()
         
         presenter.deviceManager = dataManager
