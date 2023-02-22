@@ -58,7 +58,7 @@ class BTDeviceTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            output.updateDetail()
+            output.connectTo(peripheral: peripheral)
         default:
             return
         }
