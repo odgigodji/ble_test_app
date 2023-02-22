@@ -17,6 +17,17 @@ class BTPeriferalTableViewController: UITableViewController {
     var output: BTPresenterOutput!
 
     var discoveredPeripherals = Set<BTDisplayPeripheral>()
+//    var discoveredPeripherals : Set<BTDisplayPeripheral> {
+//        get {
+//            return output.deviceManager.discoveredPeripherals
+//        }
+//        set(newPeripherals) {
+////            self.discoveredPeripherals = newPeripherals
+//            DispatchQueue.main.async {
+//                self.tableView.reloadData()
+//            }
+//        }
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +59,7 @@ class BTPeriferalTableViewController: UITableViewController {
         }
         cell.textLabel?.numberOfLines = 2
         
+//        let discoveredPeripherals = output.deviceManager.discoveredPeripherals
         let peripheralsArray = Array(discoveredPeripherals)
 
         cell.nameLabel.text = "\(peripheralsArray[indexPath.row].peripheral.name) " +   " \(peripheralsArray[indexPath.row].isConnectable)"
@@ -57,9 +69,20 @@ class BTPeriferalTableViewController: UITableViewController {
 
 
 extension BTPeriferalTableViewController: BTPresenterInput {
-    func showDevices() {
+    func showDevices(discoveredPeripherals: Set<BTDisplayPeripheral>) {
         print("XXXX")
 //        self.discoveredPeripherals = discoveredPeripherals
-        tableView.reloadData()
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.tableView.reloadData()
+        }
     }
+}
+
+extension BTPeriferalTableViewController: Observer {
+    func update(subject: BLEManager) {
+        discoveredPeripherals = subject.discoveredPeripherals
+        self.tableView.reloadData()
+    }
+    
 }
