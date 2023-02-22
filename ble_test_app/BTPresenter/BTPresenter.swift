@@ -11,44 +11,16 @@ class BTPresenter: BTPresenterOutput {
     
     weak var view: BTPresenterInput!
     var deviceManager : BLEManager!
-//    var deviceManager : BLEManager!
     
-    func startScan(completed: @escaping (Set<BTDisplayPeripheral>) -> ()) {
+    func startScan() {
         deviceManager.startScan()
-        deviceManager.attach(view)
-       
-        view.discoveredPeripherals = deviceManager.discoveredPeripherals
-//        let discoveredPeripherals = self.deviceManager.discoveredPeripherals
-//        view.discoveredPeripherals = discoveredPeripherals
-//        print(discoveredPeripherals)
-        
-        //experiment
-//        DispatchQueue.global().asyncAfter(deadline: .now() + 3, execute: {
-//            let discoveredPeripherals = self.deviceManager.discoveredPeripherals
-//            self.view.showDevices(discoveredPeripherals: discoveredPeripherals)
-//            print(discoveredPeripherals)
-//        })
-        
-//        completed(discoveredPeripherals)
-        
-//            if devices.isEmpty {
-//                print("EMPTTY")
-//            } else {
-//                print("FULL")
-//            }
-//        }
-//        let numbers = dataManager.obtainNumbers()
-//        deviceManager.getDicove
-//        view.showNumbers(numbers)
+        attachObserverTo(deviceManager)
     }
     
-    //when discoveredPeripherals - update ui
-    func updatePeripherals() {
-//        var devices = Set<BTDisplayPeripheral>()
-//        devices = self.deviceManager.discoveredPeripherals
-//        DispatchQueue.global().asyncAfter(deadline: .now() + 3, execute: {
-//            self.view.showDevices(devices)
-//        })
+    private func attachObserverTo(_ deviceManager: BLEManager) {
+        deviceManager.attach(view)
+        
+        view.discoveredPeripherals = deviceManager.discoveredPeripherals
     }
     
 }

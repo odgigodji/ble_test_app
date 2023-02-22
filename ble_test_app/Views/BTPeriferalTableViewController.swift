@@ -10,34 +10,16 @@ import CoreBluetooth
 
 
 class BTPeriferalTableViewController: UITableViewController {
-//    private var centralManager: CBCentralManager!
-//    private var deviceManager : BLEManager!
-//    var services = [CBUUID]()
-    
     var output: BTPresenterOutput!
 
     var discoveredPeripherals = Set<BTDisplayPeripheral>()
-//    var discoveredPeripherals : Set<BTDisplayPeripheral> {
-//        get {
-//            return output.deviceManager.discoveredPeripherals
-//        }
-//        set(newPeripherals) {
-////            self.discoveredPeripherals = newPeripherals
-//            DispatchQueue.main.async {
-//                self.tableView.reloadData()
-//            }
-//        }
-//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setTableView()
         view.backgroundColor = .brown
-        output.startScan { discoveredPeripherals in
-            print(discoveredPeripherals)
-//            self.discoveredPeripherals = discoveredPeripherals
-        }
+        output.startScan()
     }
     
     //MARK: - Configure
@@ -69,20 +51,8 @@ class BTPeriferalTableViewController: UITableViewController {
 
 
 extension BTPeriferalTableViewController: BTPresenterInput {
-    func showDevices(discoveredPeripherals: Set<BTDisplayPeripheral>) {
-        print("XXXX")
-//        self.discoveredPeripherals = discoveredPeripherals
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.tableView.reloadData()
-        }
-    }
-}
-
-extension BTPeriferalTableViewController: Observer {
     func update(subject: BLEManager) {
         discoveredPeripherals = subject.discoveredPeripherals
         self.tableView.reloadData()
     }
-    
 }

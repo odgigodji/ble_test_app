@@ -10,7 +10,6 @@ import Foundation
 
 protocol BTPresenterOutput: AnyObject {
     var deviceManager : BLEManager! { get set }
-    func startScan(completed: @escaping (Set<BTDisplayPeripheral>) -> ())
-    func updatePeripherals()
+    func startScan()
 
 }

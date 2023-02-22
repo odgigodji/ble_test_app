@@ -7,7 +7,6 @@
 
 import Foundation
 
-protocol BTPresenterInput: AnyObject, Observer {
+protocol BTPresenterInput: AnyObject, BLEManagerObserver {
     var discoveredPeripherals : Set<BTDisplayPeripheral> { get set }
-    func showDevices(discoveredPeripherals: Set<BTDisplayPeripheral>)
 }

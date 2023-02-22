@@ -15,8 +15,8 @@ protocol BLEManager: AnyObject {
     func configureManager()
     func startScan()
     
-    func attach(_ observer: Observer)
-    func detach(_ observer: Observer)
+    func attach(_ observer: BLEManagerObserver)
+    func detach(_ observer: BLEManagerObserver)
     func notify()
 }
 
@@ -25,15 +25,15 @@ final class BLEManagerImpl: CBCentralManager, CBCentralManagerDelegate, BLEManag
     var discoveredPeripherals = Set<BTDisplayPeripheral>()
     
     //MARK: - observers stuff
-    private lazy var observers = [Observer]()
+    private lazy var observers = [BLEManagerObserver]()
 
     /// The subscription management methods.
-    func attach(_ observer: Observer) {
+    func attach(_ observer: BLEManagerObserver) {
         print("Subject: Attached an observer.\n")
         observers.append(observer)
     }
 
-    func detach(_ observer: Observer) {
+    func detach(_ observer: BLEManagerObserver) {
         if let idx = observers.firstIndex(where: { $0 === observer }) {
             observers.remove(at: idx)
             print("Subject: Detached an observer.\n")
