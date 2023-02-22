@@ -19,7 +19,6 @@ protocol BLEManager: AnyObject, BLManagerSubject {
 
 final class BLEManagerImpl: CBCentralManager, CBCentralManagerDelegate, BLEManager {
 
-
     var discoveredPeripherals = Set<BTDisplayPeripheral>()
     
     private lazy var observers = [BLEManagerObserver]()
@@ -41,17 +40,14 @@ final class BLEManagerImpl: CBCentralManager, CBCentralManagerDelegate, BLEManag
     
     //MARK: - Delegate methods
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-//                self.peripheral.insert(peripheral)
-        
-//        DispatchQueue.global().async {[weak self] in
-        //            guard let self = self else { return }
         let isConnectable = advertisementData["kCBAdvDataIsConnectable"] as! Bool
         
         let displayPeripheral = BTDisplayPeripheral(peripheral: peripheral, lastRSSI: RSSI, isConnectable: isConnectable)
+        //MARK: - delegate service 
+        displayPeripheral.peripheral.delegate = self
         
         if self.discoveredPeripherals.contains(displayPeripheral) == false {
             self.discoveredPeripherals.insert(displayPeripheral)
-//            print(displayPeripheral)
         }
         notify()
     }
@@ -59,7 +55,6 @@ final class BLEManagerImpl: CBCentralManager, CBCentralManagerDelegate, BLEManag
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         switch central.state {
         case .poweredOn:
-//            output.startScan()
             print("START SCAN")
             startScan()
         default:
@@ -69,6 +64,7 @@ final class BLEManagerImpl: CBCentralManager, CBCentralManagerDelegate, BLEManag
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("CONNECTED!")
+        peripheral.discoverServices(nil)
     }
     
     //MARK: - Observer / Subject
@@ -88,4 +84,14 @@ final class BLEManagerImpl: CBCentralManager, CBCentralManagerDelegate, BLEManag
         observers.forEach({ $0.update(subject: self)})
     }
     
+}
+
+extension BLEManagerImpl: CBPeripheralDelegate {
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
+        guard let services = peripheral.services else { return }
+        
+        for service in services {
+            print(services)
+        }
+    }
 }
