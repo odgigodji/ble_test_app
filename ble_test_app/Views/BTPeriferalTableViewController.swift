@@ -18,7 +18,11 @@ class BTPeriferalTableViewController: UITableViewController {
         super.viewDidLoad()
         
         setTableView()
-        view.backgroundColor = .brown
+        tableView.backgroundColor = .systemBackground
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.title = "Device Manager"
+
+//        print(navigationController?.title)
         output.startScan()
     }
     
@@ -27,6 +31,7 @@ class BTPeriferalTableViewController: UITableViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(BTTableViewCell.self, forCellReuseIdentifier: BTTableViewCell.reuseID)
+//        tableView.rowHeight = 200
     }
     
     
@@ -44,12 +49,18 @@ class BTPeriferalTableViewController: UITableViewController {
 //        let discoveredPeripherals = output.deviceManager.discoveredPeripherals
 //        let peripheralsArray = Array(discoveredPeripherals)
 
-        cell.nameLabel.text = "\(discoveredPeripherals[indexPath.row].peripheral.name ?? "n/a") " +   " \(discoveredPeripherals[indexPath.row].isConnectable)"
+        cell.nameLabel.text = "\(discoveredPeripherals[indexPath.row].peripheral.name ?? "n/a") " +   " \(discoveredPeripherals[indexPath.row].isConnectable)" +
+        "\(discoveredPeripherals[indexPath.row].lastRSSI)"
+            
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(discoveredPeripherals[indexPath.row])
+//        print(discoveredPeripherals[indexPath.row])
+        let vc = BTDeviceViewController()
+        vc.setVC(with: discoveredPeripherals[indexPath.row])
+        
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

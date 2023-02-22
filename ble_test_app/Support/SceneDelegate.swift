@@ -23,9 +23,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let nc = UINavigationController()
         nc.viewControllers = [assembly.view]
         
-//        nc.navigationBar.prefersLargeTitles = true
-        nc.title = "Device Manager"
-        
         window?.rootViewController = nc
         window?.makeKeyAndVisible()
     }

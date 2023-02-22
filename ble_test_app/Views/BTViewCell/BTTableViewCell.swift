@@ -15,6 +15,7 @@ class BTTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        backgroundColor = .systemGray6
         configureLabel()
     }
     
@@ -29,10 +30,10 @@ class BTTableViewCell: UITableViewCell {
     func configureLabel() {
         addSubview(nameLabel)
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.text = "her"
+        nameLabel.font = UIFont.systemFont(ofSize: 20)
         
         NSLayoutConstraint.activate([
-            nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             nameLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
