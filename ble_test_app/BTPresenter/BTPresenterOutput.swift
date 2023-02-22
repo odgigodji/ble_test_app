@@ -8,8 +8,8 @@
 import Foundation
 
 
-protocol BTPresenterOutput: AnyObject {
+protocol BTPresenterOutput: AnyObject, BLEManagerObserver  {
     var deviceManager : BLEManager! { get set }
     func startScan()
-
+//    func update(subject: BLEManager) 
 }

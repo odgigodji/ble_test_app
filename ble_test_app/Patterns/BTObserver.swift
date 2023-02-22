@@ -8,6 +8,5 @@
 import Foundation
 
 protocol BLEManagerObserver: AnyObject {
-
     func update(subject: BLEManager)
 }

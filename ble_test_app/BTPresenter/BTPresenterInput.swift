@@ -7,6 +7,7 @@
 
 import Foundation
 
-protocol BTPresenterInput: AnyObject, BLEManagerObserver {
-    var discoveredPeripherals : Set<BTDisplayPeripheral> { get set }
+protocol BTPresenterInput: AnyObject {
+    var discoveredPeripherals : [BTDisplayPeripheral] { get set }
+    func updatePeripheralsOnTableView(peripherals: [BTDisplayPeripheral])
 }

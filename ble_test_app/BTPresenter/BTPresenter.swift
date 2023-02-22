@@ -7,7 +7,7 @@
 
 import Foundation
 
-class BTPresenter: BTPresenterOutput {
+class BTPresenter: BTPresenterOutput, BLEManagerObserver {
     
     weak var view: BTPresenterInput!
     var deviceManager : BLEManager!
@@ -18,9 +18,12 @@ class BTPresenter: BTPresenterOutput {
     }
     
     private func attachObserverTo(_ deviceManager: BLEManager) {
-        deviceManager.attach(view)
-        
-        view.discoveredPeripherals = deviceManager.discoveredPeripherals
+        deviceManager.attach(self)
+    }
+    
+    func update(subject: BLEManager) {
+        let peripherals = Array(subject.discoveredPeripherals)
+        view.updatePeripheralsOnTableView(peripherals: peripherals)
     }
     
 }

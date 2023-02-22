@@ -12,7 +12,7 @@ import CoreBluetooth
 class BTPeriferalTableViewController: UITableViewController {
     var output: BTPresenterOutput!
 
-    var discoveredPeripherals = Set<BTDisplayPeripheral>()
+    var discoveredPeripherals = [BTDisplayPeripheral]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,17 +42,22 @@ class BTPeriferalTableViewController: UITableViewController {
         cell.textLabel?.numberOfLines = 2
         
 //        let discoveredPeripherals = output.deviceManager.discoveredPeripherals
-        let peripheralsArray = Array(discoveredPeripherals)
+//        let peripheralsArray = Array(discoveredPeripherals)
 
-        cell.nameLabel.text = "\(peripheralsArray[indexPath.row].peripheral.name) " +   " \(peripheralsArray[indexPath.row].isConnectable)"
+        cell.nameLabel.text = "\(discoveredPeripherals[indexPath.row].peripheral.name ?? "n/a") " +   " \(discoveredPeripherals[indexPath.row].isConnectable)"
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(discoveredPeripherals[indexPath.row])
     }
 }
 
 
 extension BTPeriferalTableViewController: BTPresenterInput {
-    func update(subject: BLEManager) {
-        discoveredPeripherals = subject.discoveredPeripherals
+    
+    func updatePeripheralsOnTableView(peripherals: [BTDisplayPeripheral]) {
+        discoveredPeripherals = peripherals
         self.tableView.reloadData()
     }
 }
