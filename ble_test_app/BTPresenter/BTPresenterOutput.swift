@@ -12,5 +12,5 @@ protocol BTPresenterOutput: AnyObject, BLEManagerObserver  {
     var deviceManager : BLEManager! { get set }
     var detailView: BTPresenterDetailInput! { get set }
     func startScan()
-    func connectTo(peripheral: BTDisplayPeripheral)
+    func connectTo(_ peripheral: BTDisplayPeripheral)
 }

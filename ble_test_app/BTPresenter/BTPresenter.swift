@@ -27,8 +27,11 @@ class BTPresenter: BTPresenterOutput, BLEManagerObserver {
         view.updatePeripheralsOnTableView(peripherals: peripherals)
     }
     
-    func connectTo(peripheral: BTDisplayPeripheral) {
-        print("PERIPHERAL IS = \(peripheral.peripheral.name)")
+    func connectTo(_ peripheral: BTDisplayPeripheral) {
+//        guard let name = peripheral.peripheral.name else { return }
+       
+        deviceManager.connectTo(peripheral.peripheral)
+//        print("PERIPHERAL IS = \(name)")
         detailView.updateVC()
     }
     

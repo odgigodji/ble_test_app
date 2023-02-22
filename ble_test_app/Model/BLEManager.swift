@@ -13,10 +13,12 @@ protocol BLEManager: AnyObject, BLManagerSubject {
     var discoveredPeripherals : Set<BTDisplayPeripheral> { get set }
     func configureManager()
     func startScan()
+    func connectTo(_ peripheral: CBPeripheral)
 }
 
 
 final class BLEManagerImpl: CBCentralManager, CBCentralManagerDelegate, BLEManager {
+
 
     var discoveredPeripherals = Set<BTDisplayPeripheral>()
     
@@ -32,6 +34,12 @@ final class BLEManagerImpl: CBCentralManager, CBCentralManagerDelegate, BLEManag
         }
     }
     
+    func connectTo(_ peripheral: CBPeripheral) {
+        self.connect(peripheral)
+    }
+    
+    
+    //MARK: - Delegate methods
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
 //                self.peripheral.insert(peripheral)
         
@@ -59,6 +67,9 @@ final class BLEManagerImpl: CBCentralManager, CBCentralManagerDelegate, BLEManag
         }
     }
     
+    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+        print("CONNECTED!")
+    }
     
     //MARK: - Observer / Subject
     /// The subscription management methods.

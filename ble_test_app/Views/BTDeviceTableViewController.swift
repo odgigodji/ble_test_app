@@ -57,11 +57,15 @@ class BTDeviceTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
-        case 0:
-            output.connectTo(peripheral: peripheral)
+        case 1:
+            output.connectTo(peripheral)
         default:
             return
         }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        tableView.cellForRow(at: IndexPath(row: 0, section: 1))?.textLabel?.text = "echo"
     }
     
 }
@@ -73,7 +77,7 @@ extension BTDeviceTableViewController: BTPresenterDetailInput {
     }
     
     func updateVC() {
-        print("LALAL")
+        tableView.cellForRow(at: IndexPath(row: 0, section: 1))?.textLabel?.text = "Connecting..."
     }
     
 }
