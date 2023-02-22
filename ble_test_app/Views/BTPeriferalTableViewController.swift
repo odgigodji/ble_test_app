@@ -31,7 +31,7 @@ class BTPeriferalTableViewController: UITableViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(BTTableViewCell.self, forCellReuseIdentifier: BTTableViewCell.reuseID)
-//        tableView.rowHeight = 200
+        tableView.rowHeight = 50
     }
     
     
@@ -57,7 +57,7 @@ class BTPeriferalTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        print(discoveredPeripherals[indexPath.row])
-        let vc = BTDeviceViewController()
+        let vc = BTDeviceTableViewController()
         vc.setVC(with: discoveredPeripherals[indexPath.row])
         
         navigationController?.pushViewController(vc, animated: true)

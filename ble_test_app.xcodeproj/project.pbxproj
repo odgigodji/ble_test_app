@@ -15,7 +15,7 @@
 		FA03DB8F29A40463007DEBDF /* BLEManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03DB8E29A40463007DEBDF /* BLEManager.swift */; };
 		FA03DB9129A52D71007DEBDF /* BTDisplayPeripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03DB9029A52D70007DEBDF /* BTDisplayPeripheral.swift */; };
 		FA03DB9529A64422007DEBDF /* BTObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03DB9429A64422007DEBDF /* BTObserver.swift */; };
-		FA03DB9829A68087007DEBDF /* BTDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03DB9729A68087007DEBDF /* BTDeviceViewController.swift */; };
+		FA03DB9829A68087007DEBDF /* BTDeviceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA03DB9729A68087007DEBDF /* BTDeviceTableViewController.swift */; };
 		FA6386E8299F9EE200A0A06F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6386E7299F9EE200A0A06F /* AppDelegate.swift */; };
 		FA6386EA299F9EE200A0A06F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6386E9299F9EE200A0A06F /* SceneDelegate.swift */; };
 		FA6386EC299F9EE200A0A06F /* BTPeriferalTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6386EB299F9EE200A0A06F /* BTPeriferalTableViewController.swift */; };
@@ -32,7 +32,7 @@
 		FA03DB8E29A40463007DEBDF /* BLEManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEManager.swift; sourceTree = "<group>"; };
 		FA03DB9029A52D70007DEBDF /* BTDisplayPeripheral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTDisplayPeripheral.swift; sourceTree = "<group>"; };
 		FA03DB9429A64422007DEBDF /* BTObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTObserver.swift; sourceTree = "<group>"; };
-		FA03DB9729A68087007DEBDF /* BTDeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTDeviceViewController.swift; sourceTree = "<group>"; };
+		FA03DB9729A68087007DEBDF /* BTDeviceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTDeviceTableViewController.swift; sourceTree = "<group>"; };
 		FA6386E4299F9EE200A0A06F /* ble_test_app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ble_test_app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA6386E7299F9EE200A0A06F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA6386E9299F9EE200A0A06F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -58,7 +58,7 @@
 			children = (
 				FA03DB8129A3E3C9007DEBDF /* BTViewCell */,
 				FA6386EB299F9EE200A0A06F /* BTPeriferalTableViewController.swift */,
-				FA03DB9729A68087007DEBDF /* BTDeviceViewController.swift */,
+				FA03DB9729A68087007DEBDF /* BTDeviceTableViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -213,7 +213,7 @@
 				FA6386EC299F9EE200A0A06F /* BTPeriferalTableViewController.swift in Sources */,
 				FA03DB8C29A3EA05007DEBDF /* Assembly.swift in Sources */,
 				FA03DB9129A52D71007DEBDF /* BTDisplayPeripheral.swift in Sources */,
-				FA03DB9829A68087007DEBDF /* BTDeviceViewController.swift in Sources */,
+				FA03DB9829A68087007DEBDF /* BTDeviceTableViewController.swift in Sources */,
 				FA03DB8329A3E3FB007DEBDF /* BTTableViewCell.swift in Sources */,
 				FA03DB8929A3E7C7007DEBDF /* BTPresenterInput.swift in Sources */,
 				FA6386E8299F9EE200A0A06F /* AppDelegate.swift in Sources */,
