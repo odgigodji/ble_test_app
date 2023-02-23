@@ -20,19 +20,26 @@ class BTPresenter: BTPresenterOutput, BLEManagerObserver {
     
     private func attachObserverTo(_ deviceManager: BLEManager) {
         deviceManager.attach(self)
+//        deviceManager.attach(detailView as! BLEManagerObserver)
     }
     
     func update(subject: BLEManager) {
         let peripherals = Array(subject.discoveredPeripherals)
         view.updatePeripheralsOnTableView(peripherals: peripherals)
+        
+        let services = deviceManager.discoveredServices
+//        print(services)
+        detailView.updateVC(services: services)
+//        deviceManager.discoveredServices.removeAll()
     }
     
     func connectTo(_ peripheral: BTDisplayPeripheral) {
 //        guard let name = peripheral.peripheral.name else { return }
        
         deviceManager.connectTo(peripheral.peripheral)
-//        print("PERIPHERAL IS = \(name)")
-        detailView.updateVC()
+        deviceManager.stopScan()
+        deviceManager.discoveredServices.removeAll()
+//        detailView.updateVC()
     }
     
 //    func createDetailView(with peripheral: BTDisplayPeripheral) -> UIViewController {

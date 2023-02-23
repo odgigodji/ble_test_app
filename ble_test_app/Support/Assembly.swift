@@ -26,6 +26,8 @@ class MainAssembly {
         
         presenter.deviceManager = dataManager
         presenter.deviceManager.configureManager()
+        
+        presenter.startScan()
     }
     
 }

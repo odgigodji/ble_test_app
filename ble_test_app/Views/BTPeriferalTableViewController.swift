@@ -23,7 +23,7 @@ class BTPeriferalTableViewController: UITableViewController {
         navigationItem.title = "Device Manager"
 
 //        print(navigationController?.title)
-        output.startScan()
+//        output.startScan()
     }
     
     //MARK: - Configure

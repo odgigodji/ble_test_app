@@ -7,15 +7,24 @@
 
 import UIKit
 
+
 class BTDeviceTableViewController: UITableViewController {
 
     var output: BTPresenterOutput!
+    
     var peripheral: BTDisplayPeripheral!
+    var services: [BTDisplayService]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .lightGray
         configureTableView()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        tableView.cellForRow(at: IndexPath(row: 0, section: 1))?.textLabel?.text = "echo"
+        services.removeAll()
+        tableView.reloadData()
     }
     
 
@@ -27,7 +36,12 @@ class BTDeviceTableViewController: UITableViewController {
     
     //MARK: - Delegate, DataSource
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        switch section {
+        case 0:
+            return 1
+        default:
+            return services.count > 0 ? services.count : 1
+        }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -39,7 +53,12 @@ class BTDeviceTableViewController: UITableViewController {
         if indexPath.section == 0 {
             cell.textLabel?.text = "connection status"
         } else {
-            cell.textLabel?.text = "echo lalal"
+//            cell.textLabel?.text = "echo lalal"
+            if !services.isEmpty {
+                cell.textLabel?.text = services[indexPath.row].uuid.uuidString
+            } else {
+                cell.textLabel?.text = "echo lalal"
+            }
         }
         return cell
     }
@@ -59,25 +78,34 @@ class BTDeviceTableViewController: UITableViewController {
         switch indexPath.section {
         case 1:
             output.connectTo(peripheral)
+            tableView.cellForRow(at: IndexPath(row: 0, section: 1))?.textLabel?.text = "Connecting..."
         default:
             return
         }
     }
+
     
-    override func viewDidDisappear(_ animated: Bool) {
-        tableView.cellForRow(at: IndexPath(row: 0, section: 1))?.textLabel?.text = "echo"
+
+    //MARK: - BLEMangerObserver
+    func update(subject: BLEManager) {
+//        print("BTDTVC: \(subject.services)")
+        tableView.reloadData()
     }
     
 }
 
 extension BTDeviceTableViewController: BTPresenterDetailInput {
+    
     func setVC(with peripheral: BTDisplayPeripheral) {
         self.peripheral = peripheral
         navigationItem.title = peripheral.peripheral.name ?? "N/A"
     }
     
-    func updateVC() {
-        tableView.cellForRow(at: IndexPath(row: 0, section: 1))?.textLabel?.text = "Connecting..."
+    func updateVC(services: [BTDisplayService]) {
+        self.services = services
+        tableView.reloadData()
+//        print(services)
+//        tableView.cellForRow(at: IndexPath(row: 0, section: 1))?.textLabel?.text = "Connecting..."
     }
-    
 }
+

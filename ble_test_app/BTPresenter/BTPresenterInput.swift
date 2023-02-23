@@ -14,5 +14,6 @@ protocol BTPresenterMainInput: AnyObject {
 
 protocol BTPresenterDetailInput: AnyObject {
     func setVC(with peripheral: BTDisplayPeripheral)
-    func updateVC()
+    func updateVC(services: [BTDisplayService])
+//    func updateServicesOnTableView(peripherals: [BTDisplayPeripheral])
 }

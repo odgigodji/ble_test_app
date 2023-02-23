@@ -14,11 +14,6 @@ struct BTDisplayPeripheral: Hashable {
     let isConnectable: Bool
     
     static func ==(lhs: BTDisplayPeripheral, rhs: BTDisplayPeripheral) -> Bool {
-//        if lhs.peripheral == rhs.peripheral && lhs.lastRSSI == lhs.lastRSSI {
-//           return true
-//        } else {
-//            return false
-//        }
         return lhs.peripheral == rhs.peripheral
     }
     
