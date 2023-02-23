@@ -59,13 +59,7 @@ class BTDeviceTableViewController: UITableViewController {
                 cell.textLabel?.text = services.isEmpty ? "STATUS: DISCONNECT" : "STATUS: CONNECTED"
             }
         default:
-//            cell.textLabel?.text = "echo lalal"
-            cell.textLabel?.text = !services.isEmpty  ? services[indexPath.row].uuid.uuidString : "echo"
-//            if !services.isEmpty {
-//                cell.textLabel?.text = services[indexPath.row].uuid.uuidString
-//            } else {
-//                cell.textLabel?.text = "echo"
-//            }
+            cell.textLabel?.text = !services.isEmpty  ? services[indexPath.row].uuid.debugDescription : "echo"
         }
         
         return cell
@@ -96,7 +90,9 @@ class BTDeviceTableViewController: UITableViewController {
         if services.isEmpty {
             firstConnectToPeripheral()
         } else {
-            print(services[indexPath.row])
+            //FIXME: - action to push view controller with characteristics
+            output.searchCharacteristic(from: services[indexPath.row])
+//            print(services[indexPath.row])
         }
     }
     

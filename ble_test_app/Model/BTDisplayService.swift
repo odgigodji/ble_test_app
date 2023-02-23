@@ -11,4 +11,5 @@ import CoreBluetooth
 struct BTDisplayService {
     var isPrimary : Bool
     var uuid: CBUUID
+    var service: CBService
 }

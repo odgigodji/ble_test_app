@@ -8,6 +8,7 @@
 import UIKit
 
 class BTPresenter: BTPresenterOutput, BLEManagerObserver {
+
     
     weak var view: BTPresenterMainInput!
     weak var detailView: BTPresenterDetailInput!
@@ -20,7 +21,6 @@ class BTPresenter: BTPresenterOutput, BLEManagerObserver {
     
     private func attachObserverTo(_ deviceManager: BLEManager) {
         deviceManager.attach(self)
-//        deviceManager.attach(detailView as! BLEManagerObserver)
     }
     
     func update(subject: BLEManager) {
@@ -42,8 +42,7 @@ class BTPresenter: BTPresenterOutput, BLEManagerObserver {
 //        detailView.updateVC()
     }
     
-//    func createDetailView(with peripheral: BTDisplayPeripheral) -> UIViewController {
-//        detailView.setVC(with: peripheral)
-//        return (detailView as? UIViewController)!
-//    }
+    func searchCharacteristic(from service: BTDisplayService) {
+        print(service)
+    }
 }

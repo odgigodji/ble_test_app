@@ -93,6 +93,11 @@ final class BLEManagerImpl: CBCentralManager, CBCentralManagerDelegate, BLEManag
         observers.forEach({ $0.update(subject: self)})
     }
     
+    //MARK: - Helpers
+    private func startSearchCharacteristic() {
+        
+    }
+    
 }
 
 extension BLEManagerImpl: CBPeripheralDelegate {
@@ -103,11 +108,14 @@ extension BLEManagerImpl: CBPeripheralDelegate {
         for service in services {
 //            print(service)
 //            let name = service. ?? "N/A"
-            print("-----")
-            print(service)
-            print("-----")
+//            print("-----")
+//            print(service)
+//            print("-----")
             
-            discoveredServices.append(BTDisplayService(isPrimary: service.isPrimary, uuid: service.uuid))
+            peripheral.discoverCharacteristics(nil, for: service)
+            print(service.characteristics ?? "characteristic is nil")
+            
+            discoveredServices.append(BTDisplayService(isPrimary: service.isPrimary, uuid: service.uuid, service: service))
             notify()
         }
 //        for service in services {
@@ -116,7 +124,6 @@ extension BLEManagerImpl: CBPeripheralDelegate {
             
 //            services.append(service)
         //MARK: - search characteristic
-//            peripheral.discoverCharacteristics(nil, for: service)
             
 //            print(service.characteristics ?? "characteristic is nil")
             
