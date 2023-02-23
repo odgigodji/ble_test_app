@@ -38,7 +38,7 @@ class BTDeviceTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 1
+            return 2
         default:
             return services.count > 0 ? services.count : 1
         }
@@ -50,16 +50,28 @@ class BTDeviceTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        if indexPath.section == 0 {
-            cell.textLabel?.text = "connection status"
-        } else {
-//            cell.textLabel?.text = "echo lalal"
+        
+        switch indexPath.section {
+        case 0:
+            if indexPath.row == 0 {
+                cell.textLabel?.text = "UUID: \(peripheral.peripheral.identifier)"
+            } else {
+                cell.textLabel?.text = services.isEmpty ? "STATUS: DISCONNECT" : "STATUS: CONNECTED"
+            }
+        default:
+            cell.textLabel?.text = "echo lalal"
             if !services.isEmpty {
                 cell.textLabel?.text = services[indexPath.row].uuid.uuidString
             } else {
-                cell.textLabel?.text = "echo lalal"
+                cell.textLabel?.text = "echo"
             }
         }
+        
+        
+//        if indexPath.section == 0 {
+//            cell.textLabel?.text = "connection status"
+//        } else {
+//                 }
         return cell
     }
     
@@ -79,6 +91,8 @@ class BTDeviceTableViewController: UITableViewController {
         case 1:
             output.connectTo(peripheral)
             tableView.cellForRow(at: IndexPath(row: 0, section: 1))?.textLabel?.text = "Connecting..."
+            tableView.cellForRow(at: IndexPath(row: 1, section: 0))?.textLabel?.text = "STATUS: CONNECTING..."
+            
         default:
             return
         }
@@ -103,8 +117,8 @@ extension BTDeviceTableViewController: BTPresenterDetailInput {
     
     func updateVC(services: [BTDisplayService]) {
         self.services = services
-        tableView.reloadData()
-//        print(services)
+        //        tableView.cellForRow(at: IndexPath(row: 0, section: 2))?.textLabel?.text = "STATUS: CONNECTED"
+        tableView.reloadData() //        print(services)
 //        tableView.cellForRow(at: IndexPath(row: 0, section: 1))?.textLabel?.text = "Connecting..."
     }
 }
