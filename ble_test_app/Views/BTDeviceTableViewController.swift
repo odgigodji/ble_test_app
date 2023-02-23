@@ -59,19 +59,15 @@ class BTDeviceTableViewController: UITableViewController {
                 cell.textLabel?.text = services.isEmpty ? "STATUS: DISCONNECT" : "STATUS: CONNECTED"
             }
         default:
-            cell.textLabel?.text = "echo lalal"
-            if !services.isEmpty {
-                cell.textLabel?.text = services[indexPath.row].uuid.uuidString
-            } else {
-                cell.textLabel?.text = "echo"
-            }
+//            cell.textLabel?.text = "echo lalal"
+            cell.textLabel?.text = !services.isEmpty  ? services[indexPath.row].uuid.uuidString : "echo"
+//            if !services.isEmpty {
+//                cell.textLabel?.text = services[indexPath.row].uuid.uuidString
+//            } else {
+//                cell.textLabel?.text = "echo"
+//            }
         }
         
-        
-//        if indexPath.section == 0 {
-//            cell.textLabel?.text = "connection status"
-//        } else {
-//                 }
         return cell
     }
     
@@ -92,20 +88,10 @@ class BTDeviceTableViewController: UITableViewController {
             output.connectTo(peripheral)
             tableView.cellForRow(at: IndexPath(row: 0, section: 1))?.textLabel?.text = "Connecting..."
             tableView.cellForRow(at: IndexPath(row: 1, section: 0))?.textLabel?.text = "STATUS: CONNECTING..."
-            
         default:
             return
         }
     }
-
-    
-
-    //MARK: - BLEMangerObserver
-    func update(subject: BLEManager) {
-//        print("BTDTVC: \(subject.services)")
-        tableView.reloadData()
-    }
-    
 }
 
 extension BTDeviceTableViewController: BTPresenterDetailInput {
@@ -117,9 +103,7 @@ extension BTDeviceTableViewController: BTPresenterDetailInput {
     
     func updateVC(services: [BTDisplayService]) {
         self.services = services
-        //        tableView.cellForRow(at: IndexPath(row: 0, section: 2))?.textLabel?.text = "STATUS: CONNECTED"
-        tableView.reloadData() //        print(services)
-//        tableView.cellForRow(at: IndexPath(row: 0, section: 1))?.textLabel?.text = "Connecting..."
+        tableView.reloadData()
     }
 }
 
