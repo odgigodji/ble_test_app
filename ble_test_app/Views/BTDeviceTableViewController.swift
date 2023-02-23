@@ -26,8 +26,8 @@ class BTDeviceTableViewController: UITableViewController {
         services.removeAll()
         tableView.reloadData()
     }
-    
 
+    //MARK: - Configure
     func configureTableView() {
         tableView.rowHeight = 80
         tableView.sectionHeaderHeight = 50
@@ -85,12 +85,25 @@ class BTDeviceTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 1:
-            output.connectTo(peripheral)
-            tableView.cellForRow(at: IndexPath(row: 0, section: 1))?.textLabel?.text = "Connecting..."
-            tableView.cellForRow(at: IndexPath(row: 1, section: 0))?.textLabel?.text = "STATUS: CONNECTING..."
+            processingSelectionRow(indexPath: indexPath)
         default:
             return
         }
+    }
+    
+    //MARK: - Actions
+    private func processingSelectionRow(indexPath: IndexPath) {
+        if services.isEmpty {
+            firstConnectToPeripheral()
+        } else {
+            print(services[indexPath.row])
+        }
+    }
+    
+    private func firstConnectToPeripheral() {
+        output.connectTo(peripheral)
+        tableView.cellForRow(at: IndexPath(row: 0, section: 1))?.textLabel?.text = "Connecting..."
+        tableView.cellForRow(at: IndexPath(row: 1, section: 0))?.textLabel?.text = "STATUS: CONNECTING..."
     }
 }
 
