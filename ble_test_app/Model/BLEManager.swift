@@ -120,12 +120,12 @@ extension BLEManagerImpl: CBPeripheralDelegate {
            //MARK: - discover Descriptors
 //            peripheral.discoverDescriptors(for: characteristic)
             
-            notify()
+//            notify()
             
             
             if characteristic.properties.contains(.read) {
 //                print("\(characteristic.uuid): properties contain .read")
-                peripheral.readValue(for: characteristic)
+//                peripheral.readValue(for: characteristic)
                 
             }
             if characteristic.properties.contains(.notify) {
@@ -137,24 +137,16 @@ extension BLEManagerImpl: CBPeripheralDelegate {
             if characteristic.properties.contains(.write) {
 //                print("\(characteristic.uuid): can write ")
 
+                
                 let data = Data(Array("Hello".utf8))
-//                print(data)
 
                 peripheral.writeValue(data, for: characteristic, type: .withResponse)
 
-                print("VALUE WRITTEN")
-//                print("READ VALUE: ")
-//                peripheral.readValue(for: characteristic)
-                
-//                let string = String(da characteristic.value?.debugDescription.utf8)
-//                let string = String(: characteristic.value?)
-                let string = String(data: characteristic.value ?? Data(), encoding: .utf8)
-                
-//                print("Char value: \(characteristic.value?.debugDescription ?? "nil")")
-                print("Char value: \(string)")
+                print("VALUE WRITTEN to \(characteristic.uuid.debugDescription)")
+
             }
 
-//            notify()
+            notify()
         }
     }
     
@@ -183,9 +175,10 @@ extension BLEManagerImpl: CBPeripheralDelegate {
     func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
         
         guard error == nil else {
-            print("ERROR: \(error!.localizedDescription)")
+            print("WRITE ERROR : \(error!.localizedDescription)")
             return
         }
+        print("NEW VALUE = \(characteristic.value) ")
         
 //        print(characteristic.va)
 //        switch characteristic.uuid {
