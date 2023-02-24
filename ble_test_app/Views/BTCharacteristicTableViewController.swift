@@ -61,14 +61,13 @@ class BTCharacteristicTableViewController: UITableViewController {
                 cell.textLabel?.text = "WRITE"
                 delegate.output.writeCharacteristic()
             case 1:
-//                cell.textLabel?.text = "READ"
-//                                cell.textLabel?.text =  + (characteristic.value?.description ?? "-")
-                
                 let string = String(data: characteristic.value ?? Data(), encoding: .utf8)
                 cell.textLabel?.text = "(\(characteristic.value?.debugDescription ?? "nil"))  \(string ?? " ")"
             default:
                 cell.textLabel?.text = "test value "
             }
+        case 1:
+            cell.textLabel?.text = characteristic.notifying ? "notifying" : "not notifying"
         default:
             cell.textLabel?.text = "her "
 //            cell.textLabel?.text = !characteristics.isEmpty ? characteristics[indexPath.row].uuid.debugDescription : "echo"
