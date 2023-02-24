@@ -111,8 +111,7 @@ extension BLEManagerImpl: CBPeripheralDelegate {
             discoveredCharacteristic.append(BTDisplayCharacteristic(uuid: characteristic.uuid, properties: characteristic.properties.rawValue, value: characteristic.value, notifying: characteristic.isNotifying, characteristic: characteristic))
             
             if characteristic.properties.contains(.read) {
-//                print("\(characteristic.uuid): properties contain .read")
-//                peripheral.readValue(for: characteristic)
+                peripheral.readValue(for: characteristic)
                 
             }
             if characteristic.properties.contains(.notify) {
@@ -122,7 +121,7 @@ extension BLEManagerImpl: CBPeripheralDelegate {
             if characteristic.properties.contains(.write) {
                 let data = Data(Array("Hello".utf8))
                 peripheral.writeValue(data, for: characteristic, type: .withResponse)
-                print("VALUE WRITTEN to \(characteristic.uuid.debugDescription)")
+//                print("VALUE WRITTEN to \(characteristic.uuid.debugDescription)")
             }
             notify()
         }

@@ -16,14 +16,10 @@ class BTPeriferalTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setTableView()
         tableView.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.title = "Device Manager"
-
-//        print(navigationController?.title)
-//        output.startScan()
     }
     
     //MARK: - Configure

@@ -38,7 +38,7 @@ class BTCharacteristicTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 3
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -70,7 +70,6 @@ class BTCharacteristicTableViewController: UITableViewController {
             cell.textLabel?.text = characteristic.notifying ? "subscribe" : "not notifying"
         default:
             cell.textLabel?.text = "her "
-//            cell.textLabel?.text = !characteristics.isEmpty ? characteristics[indexPath.row].uuid.debugDescription : "echo"
         }
         
         return cell
@@ -82,8 +81,6 @@ class BTCharacteristicTableViewController: UITableViewController {
             return "VALUE"
         case 1:
             return "NOTIFY VALUE"
-        case 2:
-            return "DESCRIPTOR"
         default:
             return "n/a"
         }
