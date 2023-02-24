@@ -14,7 +14,7 @@ protocol BTPresenterOutput: AnyObject, BLEManagerObserver  {
     func connectTo(_ peripheral: BTDisplayPeripheral)
     func searchCharacteristic(from service: BTDisplayCharacteristic)
     func writeCharacteristic()
-    func readCharacteristic()
+    func readCharacteristic(_ characteristic: BTDisplayCharacteristic)
 }
 
 class BTPresenter: BTPresenterOutput, BLEManagerObserver {
@@ -42,6 +42,9 @@ class BTPresenter: BTPresenterOutput, BLEManagerObserver {
         let services = deviceManager.discoveredCharacteristic
 //        print(services)
         detailView.updateVC(services: services)
+        
+//        let value = deviceManager.v
+        
 //        deviceManager.discoveredServices.removeAll()
     }
     
@@ -64,7 +67,7 @@ class BTPresenter: BTPresenterOutput, BLEManagerObserver {
         print("write")
     }
     
-    func readCharacteristic() {
+    func readCharacteristic(_ characteristic: BTDisplayCharacteristic) {
         print("read")
     }
     

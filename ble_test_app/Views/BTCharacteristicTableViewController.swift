@@ -59,8 +59,10 @@ class BTCharacteristicTableViewController: UITableViewController {
             switch indexPath.row {
             case 0:
                 cell.textLabel?.text = "WRITE"
+                delegate.output.writeCharacteristic()
             case 1:
-                cell.textLabel?.text = "READ"
+//                cell.textLabel?.text = "READ"
+                cell.textLabel?.text = characteristic.value?.debugDescription ?? "nil"
             default:
                 cell.textLabel?.text = "test value "
             }
@@ -92,7 +94,7 @@ class BTCharacteristicTableViewController: UITableViewController {
 //                print("write")
                 delegate.output.writeCharacteristic()
             } else {
-                delegate.output.readCharacteristic()
+                delegate.output.readCharacteristic(characteristic)
             }
 //            processingSelectionRow(indexPath: indexPath)
         default:

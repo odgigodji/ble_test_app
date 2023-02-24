@@ -23,6 +23,8 @@ protocol BLEManager: AnyObject, BLManagerSubject {
 
 final class BLEManagerImpl: CBCentralManager, CBCentralManagerDelegate, BLEManager {
 
+    var characteristicValue : Data?
+    
     var discoveredPeripherals = Set<BTDisplayPeripheral>()
 //    var services = [CBService]()
     var discoveredCharacteristic = [BTDisplayCharacteristic]()
@@ -89,9 +91,9 @@ final class BLEManagerImpl: CBCentralManager, CBCentralManagerDelegate, BLEManag
     }
     
     //MARK: - Helpers
-    private func startSearchCharacteristic() {
-        
-    }
+//    private func startSearchCharacteristic() {
+//
+//    }
     
 }
 
@@ -139,7 +141,7 @@ extension BLEManagerImpl: CBPeripheralDelegate {
             
 //            if characteristic.properties.contains(.read) {
 //                print("\(characteristic.uuid): properties contain .read")
-////                peripheral.readValue(for: characteristic)
+//                peripheral.readValue(for: characteristic)
 //            }
 //            if characteristic.properties.contains(.notify) {
 //                print("\(characteristic.uuid): properties contain .notify")
@@ -152,26 +154,34 @@ extension BLEManagerImpl: CBPeripheralDelegate {
 //                print(data)
 //
 //                peripheral.writeValue(data, for: characteristic, type: .withResponse)
-//
-////                print("READ VALUE: ")
-////                peripheral.readValue(for: characteristic)
+
+//                print("READ VALUE: ")
+//                peripheral.readValue(for: characteristic)
 //            }
 
 //            notify()
         }
     }
     
-    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        switch characteristic.uuid {
-        case manufacturerNameStringCharacteristicCBUUID:
-            guard let value = characteristic.value else { return }
-            print(String(decoding: value, as: UTF8.self))
-        default:
-            print("-")
-          }
-    }
+//
+//    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+//        switch characteristic.uuid {
+//        case manufacturerNameStringCharacteristicCBUUID:
+//            guard let value = characteristic.value else { return }
+//            print(String(decoding: value, as: UTF8.self))
+//        default:
+//            print("-")
+//          }
+//    }
+    
     
     func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
+        
+        guard error == nil else {
+            print(error?.localizedDescription)
+            return
+        }
+        
         switch characteristic.uuid {
         case manufacturerNameStringCharacteristicCBUUID:
 //            guard let value = characteristic.value else { return }
@@ -182,22 +192,5 @@ extension BLEManagerImpl: CBPeripheralDelegate {
           }
     }
     
-    
-//    private func manufacturerNameString(from characteristic: CBCharacteristic) -> String {
-//      guard let characteristicData = characteristic.value,
-//        let byte = characteristicData.first else { return "Error" }
-//
-//      switch byte {
-//        case 0: return "Other"
-//        case 1: return "Chest"
-//        case 2: return "Wrist"
-//        case 3: return "Finger"
-//        case 4: return "Hand"
-//        case 5: return "Ear Lobe"
-//        case 6: return "Foot"
-//        default:
-//          return "Reserved for future use"
-//      }
-//    }
 
 }
