@@ -65,7 +65,7 @@ class BTDeviceTableViewController: UITableViewController {
                 cell.textLabel?.textColor = characteristics.isEmpty ? UIColor.red : UIColor.green
             }
         default:
-            cell.textLabel?.text = !characteristics.isEmpty ? characteristics[indexPath.row].uuid.debugDescription : "Connect to device"
+            cell.textLabel?.text = !characteristics.isEmpty ? characteristics[indexPath.row].uuid.debugDescription : "CONNECT TO DEVICE"
         }
         
         return cell
@@ -132,6 +132,7 @@ extension BTDeviceTableViewController: BTPresenterDetailInput {
     
     func updateVC(services: [BTDisplayCharacteristic]) {
         self.characteristics = services
+        
         tableView.reloadData()
     }
 }

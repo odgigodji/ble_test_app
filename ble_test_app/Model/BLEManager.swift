@@ -123,13 +123,16 @@ extension BLEManagerImpl: CBPeripheralDelegate {
             notify()
             
             
-//            if characteristic.properties.contains(.read) {
+            if characteristic.properties.contains(.read) {
 //                print("\(characteristic.uuid): properties contain .read")
-//                peripheral.readValue(for: characteristic)
-//            }
+                peripheral.readValue(for: characteristic)
+                
+            }
             if characteristic.properties.contains(.notify) {
-                print("\(characteristic.uuid): properties contain .notify")
-                peripheral.setNotifyValue(true, for: characteristic)
+//                print("\(characteristic.uuid): properties contain .notify")
+                
+//                peripheral.setNotifyValue(true, for: characteristic)
+//                print("\(characteristic.uuid) SUBSCRIBED ON")
             }
             if characteristic.properties.contains(.write) {
 //                print("\(characteristic.uuid): can write ")
@@ -161,6 +164,12 @@ extension BLEManagerImpl: CBPeripheralDelegate {
             print("ERROR: \(error!.localizedDescription)")
             return
         }
+        guard let value = characteristic.value else {
+            print("UPDATE: NOthing happend")
+            return
+        }
+        print("\(characteristic.uuid) VALUE UPDATED = \(value)")
+        notify()
 //        switch characteristic.uuid {
 //        case manufacturerNameStringCharacteristicCBUUID:
 //            guard let value = characteristic.value else { return }

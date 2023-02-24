@@ -67,7 +67,7 @@ class BTCharacteristicTableViewController: UITableViewController {
                 cell.textLabel?.text = "test value "
             }
         case 1:
-            cell.textLabel?.text = characteristic.notifying ? "notifying" : "not notifying"
+            cell.textLabel?.text = characteristic.notifying ? "subscribe" : "not supporting"
         default:
             cell.textLabel?.text = "her "
 //            cell.textLabel?.text = !characteristics.isEmpty ? characteristics[indexPath.row].uuid.debugDescription : "echo"

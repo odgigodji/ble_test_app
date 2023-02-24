@@ -43,7 +43,7 @@ class BTPresenter: BTPresenterOutput, BLEManagerObserver {
 //        print(services)
         detailView.updateVC(services: services)
         
-//        let value = deviceManager.v
+//        let value = deviceManager.
         
 //        deviceManager.discoveredServices.removeAll()
     }
