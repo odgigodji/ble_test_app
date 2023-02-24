@@ -62,9 +62,10 @@ class BTDeviceTableViewController: UITableViewController {
                 cell.textLabel?.text = "UUID: \(peripheral.peripheral.identifier)"
             } else {
                 cell.textLabel?.text = characteristics.isEmpty ? "STATUS: DISCONNECT" : "STATUS: CONNECTED"
+                cell.textLabel?.textColor = characteristics.isEmpty ? UIColor.red : UIColor.green
             }
         default:
-            cell.textLabel?.text = !characteristics.isEmpty ? characteristics[indexPath.row].uuid.debugDescription : "echo"
+            cell.textLabel?.text = !characteristics.isEmpty ? characteristics[indexPath.row].uuid.debugDescription : "Connect to device"
         }
         
         return cell
@@ -118,6 +119,7 @@ class BTDeviceTableViewController: UITableViewController {
         output.connectTo(peripheral)
         tableView.cellForRow(at: IndexPath(row: 0, section: 1))?.textLabel?.text = "Connecting..."
         tableView.cellForRow(at: IndexPath(row: 1, section: 0))?.textLabel?.text = "STATUS: CONNECTING..."
+        tableView.cellForRow(at: IndexPath(row: 1, section: 0))?.textLabel?.textColor = .secondaryLabel
     }
 }
 
