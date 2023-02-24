@@ -98,7 +98,7 @@ class BTDeviceTableViewController: UITableViewController {
             //FIXME: - action to push view controller with characteristics without coreBluetooth stuff
             
             characteristicVCisOpen = true
-            let vc = BTCharacteristicTableViewController(characteristic: characteristics[indexPath.row])
+            let vc = BTCharacteristicTableViewController(characteristic: characteristics[indexPath.row], delegate: self)
             navigationController?.pushViewController(vc, animated: true)
             
 //            output.searchCharacteristic(from: services[indexPath.row])

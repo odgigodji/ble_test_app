@@ -13,9 +13,13 @@ protocol BTPresenterOutput: AnyObject, BLEManagerObserver  {
     func startScan()
     func connectTo(_ peripheral: BTDisplayPeripheral)
     func searchCharacteristic(from service: BTDisplayCharacteristic)
+    func writeCharacteristic()
+    func readCharacteristic()
 }
 
 class BTPresenter: BTPresenterOutput, BLEManagerObserver {
+
+    
 
     
     weak var view: BTPresenterMainInput!
@@ -55,4 +59,13 @@ class BTPresenter: BTPresenterOutput, BLEManagerObserver {
 //        print(service.service.characteristics)
 //        characteristic = service.service.characteristics
     }
+    
+    func writeCharacteristic() {
+        print("write")
+    }
+    
+    func readCharacteristic() {
+        print("read")
+    }
+    
 }

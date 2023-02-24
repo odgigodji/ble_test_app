@@ -10,9 +10,12 @@ import UIKit
 class BTCharacteristicTableViewController: UITableViewController {
 
     var characteristic : BTDisplayCharacteristic!
+    weak var delegate: BTDeviceTableViewController!
     
-    init(characteristic: BTDisplayCharacteristic!) {
+    init(characteristic: BTDisplayCharacteristic!, delegate: BTDeviceTableViewController) {
         super.init(nibName: nil, bundle: nil)
+        
+        self.delegate = delegate
         self.characteristic = characteristic
     }
     
@@ -84,8 +87,13 @@ class BTCharacteristicTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
-        case 1:
-            print("something seleceted")
+        case 0:
+            if indexPath.row == 0 {
+//                print("write")
+                delegate.output.writeCharacteristic()
+            } else {
+                delegate.output.readCharacteristic()
+            }
 //            processingSelectionRow(indexPath: indexPath)
         default:
             return
