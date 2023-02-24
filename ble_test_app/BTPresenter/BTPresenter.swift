@@ -64,6 +64,7 @@ class BTPresenter: BTPresenterOutput, BLEManagerObserver {
     }
     
     func writeCharacteristic() {
+//        deviceManager.w
         print("write")
     }
     

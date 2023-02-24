@@ -7,13 +7,7 @@
 
 import Foundation
 import CoreBluetooth
-//
-//struct BTDisplayService {
-//    var isPrimary : Bool
-//    var uuid: CBUUID
-//    var service: CBService
-//    var characteristics: [CBCharacteristic]?
-//}
+
 
 struct BTDisplayCharacteristic {
     var uuid: CBUUID
