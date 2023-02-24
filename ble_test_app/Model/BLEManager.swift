@@ -22,9 +22,6 @@ protocol BLEManager: AnyObject, BLManagerSubject {
 
 
 final class BLEManagerImpl: CBCentralManager, CBCentralManagerDelegate, BLEManager {
-//    var services: [BTDisplayService]
-    
-    
 
     var discoveredPeripherals = Set<BTDisplayPeripheral>()
 //    var services = [CBService]()
@@ -32,9 +29,7 @@ final class BLEManagerImpl: CBCentralManager, CBCentralManagerDelegate, BLEManag
     
     private lazy var observers = [BLEManagerObserver]()
     
-    func configureManager() {
-        delegate = self
-    }
+    func configureManager() { delegate = self }
     
     func startScan() {
         DispatchQueue.global().async {

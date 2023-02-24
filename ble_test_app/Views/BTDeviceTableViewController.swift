@@ -75,7 +75,7 @@ class BTDeviceTableViewController: UITableViewController {
         case 0:
             return "DEVICE STATUS"
         case 1:
-            return "ECHO"
+            return "CHARACTERISTICS"
         default:
             return "n/a"
         }
@@ -96,12 +96,15 @@ class BTDeviceTableViewController: UITableViewController {
             firstConnectToPeripheral()
         } else {
             //FIXME: - action to push view controller with characteristics without coreBluetooth stuff
+            
+            characteristicVCisOpen = true
+            let vc = BTCharacteristicTableViewController(characteristic: characteristics[indexPath.row])
+            navigationController?.pushViewController(vc, animated: true)
+            
 //            output.searchCharacteristic(from: services[indexPath.row])
             
 //            let vc = BTCharacteristicsTableViewController()
 //            vc.configureController(service: characteristics[indexPath.row])
-//            characteristicVCisOpen = true
-//            navigationController?.pushViewController(vc, animated: true)
             
 //            showCharacteristicOnCharacteristicTVC()
 //            print(services[indexPath.row])

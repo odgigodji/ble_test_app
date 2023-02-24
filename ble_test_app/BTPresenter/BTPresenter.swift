@@ -7,6 +7,14 @@
 
 import UIKit
 
+protocol BTPresenterOutput: AnyObject, BLEManagerObserver  {
+    var deviceManager : BLEManager! { get set }
+    var detailView: BTPresenterDetailInput! { get set }
+    func startScan()
+    func connectTo(_ peripheral: BTDisplayPeripheral)
+    func searchCharacteristic(from service: BTDisplayCharacteristic)
+}
+
 class BTPresenter: BTPresenterOutput, BLEManagerObserver {
 
     
