@@ -12,16 +12,12 @@ protocol BTPresenterOutput: AnyObject, BLEManagerObserver  {
     var detailView: BTPresenterDetailInput! { get set }
     func startScan()
     func connectTo(_ peripheral: BTDisplayPeripheral)
-    func searchCharacteristic(from service: BTDisplayCharacteristic)
     func writeCharacteristic()
-    func readCharacteristic(_ characteristic: BTDisplayCharacteristic)
+//    func readCharacteristic(_ characteristic: BTDisplayCharacteristic)
 }
 
 class BTPresenter: BTPresenterOutput, BLEManagerObserver {
 
-    
-
-    
     weak var view: BTPresenterMainInput!
     weak var detailView: BTPresenterDetailInput!
     var deviceManager : BLEManager!
@@ -40,36 +36,22 @@ class BTPresenter: BTPresenterOutput, BLEManagerObserver {
         view.updatePeripheralsOnTableView(peripherals: peripherals)
         
         let services = deviceManager.discoveredCharacteristic
-//        print(services)
         detailView.updateVC(services: services)
         
-//        let value = deviceManager.
-        
-//        deviceManager.discoveredServices.removeAll()
     }
     
     func connectTo(_ peripheral: BTDisplayPeripheral) {
-//        guard let name = peripheral.peripheral.name else { return }
        
         deviceManager.connectTo(peripheral.peripheral)
         deviceManager.stopScan()
         deviceManager.discoveredCharacteristic.removeAll()
-//        detailView.updateVC()
-    }
-    
-    func searchCharacteristic(from service: BTDisplayCharacteristic) {
-//        print(service.characteristics)
-//        print(service.service.characteristics)
-//        characteristic = service.service.characteristics
     }
     
     func writeCharacteristic() {
-//        deviceManager.w
-        print("write")
+        print("Debug: write to characteristic(not working right now)")
     }
-    
-    func readCharacteristic(_ characteristic: BTDisplayCharacteristic) {
-        print("read")
-    }
+//
+//    func readCharacteristic(_ characteristic: BTDisplayCharacteristic) {
+//    }
     
 }

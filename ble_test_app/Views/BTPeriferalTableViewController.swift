@@ -45,19 +45,14 @@ class BTPeriferalTableViewController: UITableViewController {
             return BTTableViewCell()
         }
         cell.textLabel?.numberOfLines = 2
-        
-//        let discoveredPeripherals = output.deviceManager.discoveredPeripherals
-//        let peripheralsArray = Array(discoveredPeripherals)
 
-        cell.nameLabel.text = "\(discoveredPeripherals[indexPath.row].peripheral.name ?? "n/a") " +   " \(discoveredPeripherals[indexPath.row].isConnectable)" +
+        cell.nameLabel.text = "\(discoveredPeripherals[indexPath.row].peripheral.name ?? "N/A") | " +   "\(discoveredPeripherals[indexPath.row].isConnectable) | " +
         "\(discoveredPeripherals[indexPath.row].lastRSSI)"
             
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print(discoveredPeripherals[indexPath.row])
-        
         output.detailView.setVC(with: discoveredPeripherals[indexPath.row])
         let vc = output.detailView as! UIViewController
         navigationController?.pushViewController(vc, animated: true)
