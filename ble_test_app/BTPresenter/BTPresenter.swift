@@ -27,7 +27,7 @@ class BTPresenter: BTPresenterOutput, BLEManagerObserver {
         let peripherals = Array(subject.discoveredPeripherals)
         view.updatePeripheralsOnTableView(peripherals: peripherals)
         
-        let services = deviceManager.discoveredServices
+        let services = deviceManager.discoveredCharacteristic
 //        print(services)
         detailView.updateVC(services: services)
 //        deviceManager.discoveredServices.removeAll()
@@ -38,11 +38,13 @@ class BTPresenter: BTPresenterOutput, BLEManagerObserver {
        
         deviceManager.connectTo(peripheral.peripheral)
         deviceManager.stopScan()
-        deviceManager.discoveredServices.removeAll()
+        deviceManager.discoveredCharacteristic.removeAll()
 //        detailView.updateVC()
     }
     
-    func searchCharacteristic(from service: BTDisplayService) {
-        print(service)
+    func searchCharacteristic(from service: BTDisplayCharacteristic) {
+//        print(service.characteristics)
+//        print(service.service.characteristics)
+//        characteristic = service.service.characteristics
     }
 }

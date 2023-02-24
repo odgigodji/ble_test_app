@@ -13,7 +13,7 @@ let manufacturerNameStringCharacteristicCBUUID = CBUUID(string: "2A29")
 
 protocol BLEManager: AnyObject, BLManagerSubject {
     var discoveredPeripherals : Set<BTDisplayPeripheral> { get set }
-    var discoveredServices : [BTDisplayService] { get set }
+    var discoveredCharacteristic : [BTDisplayCharacteristic] { get set }
     func configureManager()
     func startScan()
     func connectTo(_ peripheral: CBPeripheral)
@@ -28,7 +28,7 @@ final class BLEManagerImpl: CBCentralManager, CBCentralManagerDelegate, BLEManag
 
     var discoveredPeripherals = Set<BTDisplayPeripheral>()
 //    var services = [CBService]()
-    var discoveredServices = [BTDisplayService]()
+    var discoveredCharacteristic = [BTDisplayCharacteristic]()
     
     private lazy var observers = [BLEManagerObserver]()
     
@@ -113,9 +113,9 @@ extension BLEManagerImpl: CBPeripheralDelegate {
 //            print("-----")
             
             peripheral.discoverCharacteristics(nil, for: service)
-            print(service.characteristics ?? "characteristic is nil")
+//            print(service.characteristics ?? "characteristic is nil")
             
-            discoveredServices.append(BTDisplayService(isPrimary: service.isPrimary, uuid: service.uuid, service: service))
+//            discoveredServices.append(BTDisplayCharacteristic(uuid: , properties: , value: , notifying: )
             notify()
         }
 //        for service in services {
@@ -136,6 +136,11 @@ extension BLEManagerImpl: CBPeripheralDelegate {
         
         for characteristic in characteristics {
             print(characteristic)
+            
+            discoveredCharacteristic.append(BTDisplayCharacteristic(uuid: characteristic.uuid, properties: characteristic.properties.rawValue, value: characteristic.value, notifying: characteristic.isNotifying, characteristic: characteristic))
+            
+            notify()
+            
             
 //            if characteristic.properties.contains(.read) {
 //                print("\(characteristic.uuid): properties contain .read")

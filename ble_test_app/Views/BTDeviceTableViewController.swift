@@ -13,7 +13,9 @@ class BTDeviceTableViewController: UITableViewController {
     var output: BTPresenterOutput!
     
     var peripheral: BTDisplayPeripheral!
-    var services: [BTDisplayService]!
+    var characteristics: [BTDisplayCharacteristic]!
+    
+    var characteristicVCisOpen = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +25,10 @@ class BTDeviceTableViewController: UITableViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         tableView.cellForRow(at: IndexPath(row: 0, section: 1))?.textLabel?.text = "echo"
-        services.removeAll()
+        if !characteristicVCisOpen {
+            characteristics.removeAll()
+        }
+        characteristicVCisOpen = false
         tableView.reloadData()
     }
 
@@ -40,7 +45,7 @@ class BTDeviceTableViewController: UITableViewController {
         case 0:
             return 2
         default:
-            return services.count > 0 ? services.count : 1
+            return characteristics.count > 0 ? characteristics.count : 1
         }
     }
     
@@ -56,10 +61,10 @@ class BTDeviceTableViewController: UITableViewController {
             if indexPath.row == 0 {
                 cell.textLabel?.text = "UUID: \(peripheral.peripheral.identifier)"
             } else {
-                cell.textLabel?.text = services.isEmpty ? "STATUS: DISCONNECT" : "STATUS: CONNECTED"
+                cell.textLabel?.text = characteristics.isEmpty ? "STATUS: DISCONNECT" : "STATUS: CONNECTED"
             }
         default:
-            cell.textLabel?.text = !services.isEmpty  ? services[indexPath.row].uuid.debugDescription : "echo"
+            cell.textLabel?.text = !characteristics.isEmpty ? characteristics[indexPath.row].uuid.debugDescription : "echo"
         }
         
         return cell
@@ -87,14 +92,24 @@ class BTDeviceTableViewController: UITableViewController {
     
     //MARK: - Actions
     private func processingSelectionRow(indexPath: IndexPath) {
-        if services.isEmpty {
+        if characteristics.isEmpty {
             firstConnectToPeripheral()
         } else {
-            //FIXME: - action to push view controller with characteristics
-            output.searchCharacteristic(from: services[indexPath.row])
+            //FIXME: - action to push view controller with characteristics without coreBluetooth stuff
+//            output.searchCharacteristic(from: services[indexPath.row])
+            
+//            let vc = BTCharacteristicsTableViewController()
+//            vc.configureController(service: characteristics[indexPath.row])
+//            characteristicVCisOpen = true
+//            navigationController?.pushViewController(vc, animated: true)
+            
+//            showCharacteristicOnCharacteristicTVC()
 //            print(services[indexPath.row])
         }
     }
+    
+//    private func showCharacteristicOnCharacteristicTVC() {
+//    }
     
     private func firstConnectToPeripheral() {
         output.connectTo(peripheral)
@@ -110,8 +125,8 @@ extension BTDeviceTableViewController: BTPresenterDetailInput {
         navigationItem.title = peripheral.peripheral.name ?? "N/A"
     }
     
-    func updateVC(services: [BTDisplayService]) {
-        self.services = services
+    func updateVC(services: [BTDisplayCharacteristic]) {
+        self.characteristics = services
         tableView.reloadData()
     }
 }
