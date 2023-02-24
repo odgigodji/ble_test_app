@@ -96,25 +96,16 @@ class BTDeviceTableViewController: UITableViewController {
         if characteristics.isEmpty {
             firstConnectToPeripheral()
         } else {
-            //FIXME: - action to push view controller with characteristics without coreBluetooth stuff
-            
             characteristicVCisOpen = true
-//            let detailCharacteristic = characteristics[indexPath.row]
             let vc = BTCharacteristicTableViewController(characteristic: characteristics[indexPath.row], delegate: self)
+            
+            print("VALUE")
+            print(characteristics[indexPath.row].value)
+            
             navigationController?.pushViewController(vc, animated: true)
-            
-//            output.searchCharacteristic(from: services[indexPath.row])
-            
-//            let vc = BTCharacteristicsTableViewController()
-//            vc.configureController(service: characteristics[indexPath.row])
-            
-//            showCharacteristicOnCharacteristicTVC()
-//            print(services[indexPath.row])
+
         }
     }
-    
-//    private func showCharacteristicOnCharacteristicTVC() {
-//    }
     
     private func firstConnectToPeripheral() {
         output.connectTo(peripheral)

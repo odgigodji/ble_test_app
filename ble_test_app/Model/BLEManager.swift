@@ -8,8 +8,6 @@
 import UIKit
 import CoreBluetooth
 
-let modelNumberStringCharacteristicCBUUID = CBUUID(string: "2A24")
-let manufacturerNameStringCharacteristicCBUUID = CBUUID(string: "2A29")
 
 protocol BLEManager: AnyObject, BLManagerSubject {
     var discoveredPeripherals : Set<BTDisplayPeripheral> { get set }
@@ -23,9 +21,9 @@ protocol BLEManager: AnyObject, BLManagerSubject {
 
 final class BLEManagerImpl: CBCentralManager, CBCentralManagerDelegate, BLEManager {
     var characteristicValue : Data?
-    var discoveredPeripherals = Set<BTDisplayPeripheral>()
-    var discoveredCharacteristic = [BTDisplayCharacteristic]()
-    private lazy var observers = [BLEManagerObserver]()
+    var discoveredPeripherals       = Set<BTDisplayPeripheral>()
+    var discoveredCharacteristic    = [BTDisplayCharacteristic]()
+    private lazy var observers      = [BLEManagerObserver]()
        
     //MARK: - Delegate methods
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
@@ -115,13 +113,12 @@ extension BLEManagerImpl: CBPeripheralDelegate {
                 
             }
             if characteristic.properties.contains(.notify) {
-//                peripheral.setNotifyValue(true, for: characteristic)
-//                print("\(characteristic.uuid) SUBSCRIBED ON")
+                peripheral.setNotifyValue(true, for: characteristic)
+                print("\(characteristic.uuid) SUBSCRIBED ON")
             }
             if characteristic.properties.contains(.write) {
                 let data = Data(Array("Hello".utf8))
                 peripheral.writeValue(data, for: characteristic, type: .withResponse)
-//                print("VALUE WRITTEN to \(characteristic.uuid.debugDescription)")
             }
             notify()
         }
@@ -148,6 +145,6 @@ extension BLEManagerImpl: CBPeripheralDelegate {
             print("WRITE ERROR : \(error!.localizedDescription)")
             return
         }
-        print("NEW VALUE = \(characteristic.value) ")
+        print("NEW VALUE = \"\(characteristic.value?.debugDescription ?? "nil")\" ")
     }
 }
